@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Web.Models
+namespace Morgan.Calculator.Web.Models
 {
     // Models returned by AccountController actions.
 

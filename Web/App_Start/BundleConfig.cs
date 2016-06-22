@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Web
+namespace Morgan.Calculator.Web
 {
 	public class BundleConfig
 	{

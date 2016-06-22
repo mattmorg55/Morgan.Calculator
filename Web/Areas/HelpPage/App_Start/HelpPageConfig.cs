@@ -16,7 +16,7 @@ using System.Web.Http;
 using System.Web.Http.OData;
 #endif
 
-namespace Web.Areas.HelpPage
+namespace Morgan.Calculator.Web.Areas.HelpPage
 {
     /// <summary>
     /// Use this class to customize the Help Page.

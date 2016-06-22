@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Web.Areas.HelpPage.ModelDescriptions
+namespace Morgan.Calculator.Web.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Web.Models;
-using Web.Providers;
-using Web.Results;
+using Morgan.Calculator.Web.Models;
+using Morgan.Calculator.Web.Providers;
+using Morgan.Calculator.Web.Results;
 
-namespace Web.Controllers
+namespace Morgan.Calculator.Web.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

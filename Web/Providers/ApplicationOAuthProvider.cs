@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Web.Models;
+using Morgan.Calculator.Web.Models;
 
-namespace Web.Providers
+namespace Morgan.Calculator.Web.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

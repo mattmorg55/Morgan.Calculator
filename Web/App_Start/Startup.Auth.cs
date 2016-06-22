@@ -8,10 +8,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Web.Providers;
-using Web.Models;
+using Morgan.Calculator.Web.Providers;
+using Morgan.Calculator.Web.Models;
 
-namespace Web
+namespace Morgan.Calculator.Web
 {
     public partial class Startup
     {

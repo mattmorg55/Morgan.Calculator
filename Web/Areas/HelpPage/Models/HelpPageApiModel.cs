@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Web.Areas.HelpPage.ModelDescriptions;
+using Morgan.Calculator.Web.Areas.HelpPage.ModelDescriptions;
 
-namespace Web.Areas.HelpPage.Models
+namespace Morgan.Calculator.Web.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

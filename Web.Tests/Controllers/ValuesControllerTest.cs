@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Web;
-using Web.Controllers;
+using Morgan.Calculator.Web;
+using Morgan.Calculator.Web.Controllers;
 
-namespace Web.Tests.Controllers
+namespace Morgan.Calculator.Web.Tests.Controllers
 {
 	[TestClass]
 	public class ValuesControllerTest

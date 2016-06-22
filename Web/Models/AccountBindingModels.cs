@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace Web.Models
+namespace Morgan.Calculator.Web.Models
 {
     // Models used as parameters to AccountController actions.
 

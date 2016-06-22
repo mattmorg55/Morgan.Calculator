@@ -4,15 +4,14 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Web.Startup))]
+[assembly: OwinStartup(typeof(Morgan.Calculator.Web.Startup))]
 
-namespace Web
+namespace Morgan.Calculator.Web
 {
-    public partial class Startup
-    {
-        public void Configuration(IAppBuilder app)
-        {
-            ConfigureAuth(app);
-        }
-    }
+	public partial class Startup
+	{
+		public void Configuration(IAppBuilder app) {
+			ConfigureAuth(app);
+		}
+	}
 }

@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Web.Areas.HelpPage.ModelDescriptions;
-using Web.Areas.HelpPage.Models;
+using Morgan.Calculator.Web.Areas.HelpPage.Models;
+using Morgan.Calculator.Web.Areas.HelpPage.ModelDescriptions;
 
-namespace Web.Areas.HelpPage
+namespace Morgan.Calculator.Web.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {
