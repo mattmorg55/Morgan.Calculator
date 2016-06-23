@@ -1,0 +1,38 @@
+﻿
+@{
+	ViewBag.Title = "Home";
+}
+
+@section Styles {
+	<link href="@Url.Content("~/Areas/Calculator/Content/Custom.css")" rel="stylesheet" type="text/css" />
+}
+
+@section scripts {
+	<script src="~/Scripts/angular.js"></script>
+	<script src="~/Areas/Calculator/Scripts/Calculator.js"></script>
+	<script src="~/Areas/Calculator/Scripts/CalculatorService.js"></script>
+	<script src="~/Areas/Calculator/Scripts/HomeController.js"></script>
+}
+<div id="calculator" ng-app="calculator">
+	<div ng-controller="HomeController">
+		<div class="row">
+			<div class="col-xs-12">
+				<input id="display" type="text" ng-model="display" class="form-control" style="max-width: unset" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">
+				<button ng-click="add(1, 2)" class="btn btn-default" >7</button>
+			</div>
+			<div class="col-xs-3">
+				<button ng-click="add(1, 2)" class="btn btn-default" >8</button>
+			</div>
+			<div class="col-xs-3">
+				<button ng-click="add(1, 2)" class="btn btn-default" >9</button>
+			</div>
+			<div class="col-xs-3">
+				<button ng-click="add(1, 2)" class="btn btn-default" >+</button>
+			</div>
+		</div>
+	</div>
+</div>

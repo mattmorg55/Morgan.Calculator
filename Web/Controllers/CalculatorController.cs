@@ -14,11 +14,15 @@ namespace Morgan.Calculator.Web.Controllers
 		private ICalculator mCalculator;
 
 		//Make routes {action}/left/right/
+		//Todo make default action w/ no params return documentation
+		//Todo make second param optional and use first param
+
+		//Note that if right is decimal the trailing slash in URL is required
 
 		public CalculatorController(ICalculator calculator) {
 			mCalculator = calculator;
 		}
-
+		
 		[HttpGet]
 		public decimal Add(decimal left, decimal right) {
 			return mCalculator.Add(left, right);
