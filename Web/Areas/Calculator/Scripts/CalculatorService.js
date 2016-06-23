@@ -1,7 +1,6 @@
 ﻿(function (app) {
 
-	
-	var calculatorService = function ($http, calculatorApiUrl) {
+	var CalculatorService = function ($http, calculatorApiUrl) {
 
 		var _exec = function (operation, left, right) {
 			return $http.get($.validator.format("{0}/{1}/{2}/{3}/", calculatorApiUrl, operation, left, right));
@@ -31,8 +30,8 @@
 		};
 	};
 
-	calculatorService.$inject = ["$http", "calculatorApiUrl"];
+	CalculatorService.$inject = ["$http", "calculatorApiUrl"];
 
-	app.factory("calculatorService", calculatorService);
+	app.factory("calculatorService", CalculatorService);
 
 } (angular.module("calculator")))
