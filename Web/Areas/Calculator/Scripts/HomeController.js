@@ -2,7 +2,30 @@
 
 	var HomeController = function ($scope, calculatorService) {
 
-		$scope.model = new CalculatorModel(calculatorService);
+		$scope.model = new CalculatorModel($scope);
+
+		$scope.compute = function () {
+			if ($scope.model.pendingOp == $scope.model.Operations.NO_OP) {
+				return $scope.model.display;
+			}
+			switch ($scope.model.pendingOp) {
+				case $scope.model.Operations.DIVIDE:
+					return calculatorService.divide($scope.model.acc, $scope.model.display);
+					break;
+				case $scope.model.Operations.MULTIPLY:
+					return calculatorService.multiply($scope.model.acc, $scope.model.display);
+					break;
+				case $scope.model.Operations.SUBTRACT:
+					return calculatorService.subtract($scope.model.acc, $scope.model.display);
+					break;
+				case $scope.model.Operations.ADD:
+					return calculatorService.add($scope.model.acc, $scope.model.display);
+					break;
+				default:
+					$scope.model.display = "ERROR Unknown operation";
+					$scope.model.currentState = new ErrorState();
+			}
+		};
 
 		$scope.numClick = function (val) {
 			$scope.model.currentState.enterDigit(val);

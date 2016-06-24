@@ -1,4 +1,4 @@
-﻿	var CalculatorModel = function (calculatorService) {
+﻿	var CalculatorModel = function (context) {
 
 		this.Operations = {
 			NO_OP: 0,
@@ -17,36 +17,13 @@
 		//Current pending operation
 		this.pendingOp = this.Operations.NO_OP;
 
-		this.currentState = new StartState(this);
+		this.currentState = new StartState(context);
 
 		this.reset = function () {
 			this.acc = 0;
 			this.display = "0";
 			this.pendingOp = this.Operations.NO_OP;
-			this.currentState = new StartState(this);
+			this.currentState = new StartState(context);
 		};
 
-		//TODO This doesn't belong in the model
-		this.compute = function () {
-			if (this.pendingOp == this.Operations.NO_OP) {
-				return this.display;
-			}
-			switch (this.pendingOp) {
-				case this.Operations.DIVIDE:
-					return calculatorService.divide(this.acc, this.display);
-					break;
-				case this.Operations.MULTIPLY:
-					return calculatorService.multiply(this.acc, this.display);
-					break;
-				case this.Operations.SUBTRACT:
-					return calculatorService.subtract(this.acc, this.display);
-					break;
-				case this.Operations.ADD:
-					return calculatorService.add(this.acc, this.display);
-					break;
-				default:
-					this.display = "ERROR Unknown operation";
-					this.currentState = new ErrorState();
-			}
-		};
 	};

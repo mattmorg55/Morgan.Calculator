@@ -1,20 +1,15 @@
-﻿//
-// I used the state diagram found here:
-// https://www.clear.rice.edu/comp212/06-spring/labs/13/
-//
-
-var StartState = function (model) {
+﻿var StartState = function (context) {
 	
 	this.enterDigit = function (num) {
-		model.display = "" + num;
+		context.model.display = "" + num;
 		if (num != 0) {
-			model.currentState = new AccumState(model);
+			context.model.currentState = new AccumState(context);
 		}
 	};
 
 	this.enterPoint = function () {
-		model.display = "0.";
-		model.currentState = new PointState(model);
+		context.model.display = "0.";
+		context.model.currentState = new PointState(context);
 	};
 
 	this.enterOp = function (op) {
@@ -27,10 +22,10 @@ var StartState = function (model) {
 
 };
 
-var AccumState = function (model) {
+var AccumState = function (context) {
 
 	this.enterDigit = function (num) {
-		model.display += num;
+		context.model.display += num;
 	};
 
 	this.enterPoint = function () {
@@ -38,26 +33,26 @@ var AccumState = function (model) {
 	};
 
 	this.enterOp = function (op) {
-		model.acc = model.compute();
-		model.display = "" + model.acc;
-		model.pendingOp = op;
-		model.currentState = new ComputeState(model);
+		context.model.acc = context.compute();
+		context.model.display = "" + context.model.acc;
+		context.model.pendingOp = op;
+		context.model.currentState = new ComputeState(context);
 	};
 
 	this.enterEquals = function () {
-		model.compute().success(function(result) {
-			model.acc = result;
-			model.display = "" + model.acc;
-			model.pendingOp = model.Operations.NO_OP;
-			model.currentState = new StartState(model);
+		context.compute().success(function(result) {
+			context.model.acc = result;
+			context.model.display = "" + context.model.acc;
+			context.model.pendingOp = context.model.Operations.NO_OP;
+			context.model.currentState = new StartState(context);
 		});
 	};
 };
 
-var PointState = function (model) {
+var PointState = function (context) {
 
 	this.enterDigit = function (num) {
-		model.display += num;
+		context.model.display += num;
 	};
 
 	this.enterPoint = function () {
@@ -73,14 +68,14 @@ var PointState = function (model) {
 	};
 };
 
-var ComputeState = function (model) {
+var ComputeState = function (context) {
 
 	this.enterDigit = function (num) {
-		model.display = "" + num;
+		context.model.display = "" + num;
 		if (num == 0) {
-			model.currentState = new StartState(model);
+			context.model.currentState = new StartState(context);
 		} else {
-			model.currentState = new AccumState(model);
+			context.model.currentState = new AccumState(context);
 		}
 	};
 
