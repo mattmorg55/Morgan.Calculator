@@ -250,8 +250,10 @@
   <ItemGroup>
     <Content Include="Areas\Calculator\Content\Custom.css" />
     <Content Include="Areas\Calculator\Scripts\Calculator.js" />
+    <Content Include="Areas\Calculator\Scripts\CalculatorModel.js" />
     <Content Include="Areas\Calculator\Scripts\CalculatorService.js" />
     <Content Include="Areas\Calculator\Scripts\HomeController.js" />
+    <Content Include="Areas\Calculator\Scripts\CalculatorState.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
