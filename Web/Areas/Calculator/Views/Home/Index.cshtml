@@ -17,6 +17,9 @@
 }
 <div id="calculator" ng-app="calculator">
 	<div ng-controller="HomeController">
+		<div id="debugPanel" class="row">
+			<div class="col-xs-12">Current State: {{model.currentState.name}}, Acc: {{model.acc}}, Pending Op: {{model.pendingOpName()}}</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-12">
 				<input id="display" type="text" ng-model="model.display" class="form-control" />
@@ -82,6 +85,9 @@
 			<div class="col-xs-6">
 				<button ng-click="execClick()" class="btn btn-default">=</button>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"><input id="debug" type="checkbox" name="debug" value="debug">Debug<br></div>
 		</div>
 	</div>
 </div>

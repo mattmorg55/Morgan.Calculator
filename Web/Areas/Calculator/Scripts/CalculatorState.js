@@ -1,112 +1,178 @@
-﻿var StartState = function (context) {
-	
-	this.enterDigit = function (num) {
-		context.model.display = "" + num;
-		if (num != 0) {
-			context.model.currentState = new AccumState(context);
-		}
-	};
+﻿var CalculatorState = {
 
-	this.enterPoint = function () {
-		context.model.display = "0.";
-		context.model.currentState = new PointState(context);
-	};
+	Start: function (context) {
 
-	this.enterOp = function (op) {
-	
-	};
+		this.name = "Start";
 
-	this.enterEquals = function () {
+		this.enterDigit = function (num) {
+			context.model.display = "" + num;
+			if (num != 0) {
+				context.model.currentState = new CalculatorState.Accum(context);
+			}
+		};
 
-	};
+		this.enterPoint = function () {
+			context.model.display = "0.";
+			context.model.currentState = new CalculatorState.Point(context);
+		};
 
-};
+		this.enterOp = function (op) {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = op;
+				context.model.currentState = new CalculatorState.Compute(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
 
-var AccumState = function (context) {
+		this.enterEquals = function () {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = context.model.Operations.NO_OP;
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
 
-	this.enterDigit = function (num) {
-		context.model.display += num;
-	};
+	},
 
-	this.enterPoint = function () {
+	Accum: function (context) {
 
-	};
+		this.name = "Accum";
 
-	this.enterOp = function (op) {
-		context.model.acc = context.compute();
-		context.model.display = "" + context.model.acc;
-		context.model.pendingOp = op;
-		context.model.currentState = new ComputeState(context);
-	};
+		this.enterDigit = function (num) {
+			context.model.display += num;
+		};
 
-	this.enterEquals = function () {
-		context.compute().success(function(result) {
-			context.model.acc = result;
-			context.model.display = "" + context.model.acc;
-			context.model.pendingOp = context.model.Operations.NO_OP;
-			context.model.currentState = new StartState(context);
-		});
-	};
-};
+		this.enterPoint = function () {
+			context.model.display += ".";
+			context.model.currentState = new CalculatorState.Point(context);
+		};
 
-var PointState = function (context) {
+		this.enterOp = function (op) {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = op;
+				context.model.currentState = new CalculatorState.Compute(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
 
-	this.enterDigit = function (num) {
-		context.model.display += num;
-	};
+		this.enterEquals = function () {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = context.model.Operations.NO_OP;
+				context.model.currentState = new CalculatorState.Start(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
+	},
 
-	this.enterPoint = function () {
+	Point: function (context) {
 
-	};
+		this.Point = "Point";
 
-	this.enterOp = function (op) {
+		this.enterDigit = function (num) {
+			context.model.display += num;
+		};
 
-	};
+		this.enterPoint = function () {
+			//do nothing
+		};
 
-	this.enterEquals = function () {
+		this.enterOp = function (op) {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = op;
+				context.model.currentState = new CalculatorState.Compute(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
 
-	};
-};
+		this.enterEquals = function () {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = context.model.Operations.NO_OP;
+				context.model.currentState = new CalculatorState.Start(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
+	},
 
-var ComputeState = function (context) {
+	Compute: function (context) {
 
-	this.enterDigit = function (num) {
-		context.model.display = "" + num;
-		if (num == 0) {
-			context.model.currentState = new StartState(context);
-		} else {
-			context.model.currentState = new AccumState(context);
-		}
-	};
+		this.name = "Compute";
 
-	this.enterPoint = function () {
+		this.enterDigit = function (num) {
+			context.model.display = "" + num;
+			if (num == 0) {
+				context.model.currentState = new CalculatorState.Start(context);
+			} else {
+				context.model.currentState = new CalculatorState.Accum(context);
+			}
+		};
 
-	};
+		this.enterPoint = function () {
+			context.model.display = "0.";
+			context.model.currentState = new CalculatorState.Point(context);
+		};
 
-	this.enterOp = function (op) {
+		this.enterOp = function (op) {
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = op;
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
 
-	};
+		this.enterEquals = function () {
+			//apply the operation to acc with itself
+			context.compute().then(function (response) {
+				context.model.acc = response.data;
+				context.model.display = "" + context.model.acc;
+				context.model.pendingOp = context.model.Operations.NO_OP;
+				context.model.currentState = new CalculatorState.Start(context);
+			}, function (response) {
+				context.model.currentState = new CalculatorState.Error(context, response);
+			});
+		};
+	},
 
-	this.enterEquals = function () {
+	Error: function (context, response) {
 
-	};
-};
+		this.name = "Error";
 
-var ErrorState = function () {
+		this.enterDigit = function (num) {
+		};
 
-	this.enterDigit = function (num) {
+		this.enterPoint = function () {
+		};
 
-	};
+		this.enterOp = function (op) {
+		};
 
-	this.enterPoint = function () {
-
-	};
-
-	this.enterOp = function (op) {
-
-	};
-
-	this.enterEquals = function () {
-
-	};
+		this.enterEquals = function () {
+		};
+		
+		if (response) {
+			if (response.data.ExceptionMessage) {
+				context.model.display = "ERROR " + response.data.ExceptionMessage;
+			} else {
+				context.model.display = "ERROR " + response.statusText;
+			}
+		};
+	}
 };
