@@ -129,13 +129,8 @@
 		};
 
 		this.enterOp = function (op) {
-			context.compute().then(function (response) {
-				context.model.acc = response.data;
-				context.model.display = "" + context.model.acc;
-				context.model.pendingOp = op;
-			}, function (response) {
-				context.model.currentState = new CalculatorState.Error(context, response);
-			});
+			//don't do pending op just update it
+			context.model.pendingOp = op;
 		};
 
 		this.enterEquals = function () {
